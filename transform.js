@@ -8,6 +8,18 @@ process.stdin.pipe(tr).pipe(process.stdout);
 
 
 /*
+
+Here is the reference solution:
+
+  var through = require('through2');
+  var tr = through(function (buf, _, next) {
+      this.push(buf.toString().toUpperCase());
+      next();
+  });
+  process.stdin.pipe(tr).pipe(process.stdout);
+
+Challenge:
+
 Convert data from `process.stdin` to upper-case data on `process.stdout`
 using the `through2` module.
 
