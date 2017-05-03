@@ -1,14 +1,23 @@
 var through = require('through2');
-var stream = through(write, end);
-var buffer = buffer.toString();
+var tr = var tr = through(function write(data) {
+        this.queue(data.toString().toUpperCase())
+    },
+    function end () {
+        this.queue(null)
+    })
 
 process.stdin.pipe(tr).pipe(process.stdout);
 
-function write (buffer, encoding, next) {
-  this.push('I got some data: ' + buffer + '\n');
-  next();
-}
 
-function end (done) {
-  done();
-}
+/*
+var through = require('through');
+
+var tr = through(function write(data) {
+        this.queue(data.toString().toUpperCase())
+    },
+    function end () {
+        this.queue(null)
+    })
+
+process.stdin.pipe(tr).pipe(process.stdout);
+*/
