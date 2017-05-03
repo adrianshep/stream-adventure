@@ -1,5 +1,5 @@
 var through = require('through2');
-var tr = var tr = through(function write(data) {
+var tr = through(function write(data) {
         this.queue(data.toString().toUpperCase())
     },
     function end () {
