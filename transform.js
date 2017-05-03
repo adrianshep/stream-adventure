@@ -1,23 +1,17 @@
 var through = require('through2');
-var tr = through(function write(data) {
-        this.queue(data.toString().toUpperCase())
-    },
-    function end () {
-        this.queue(null)
-    })
+var tr = through(function (buffer, encoding, next) {
+        this.push(buffer.toString().toUpperCase());
+        next();
+    });
 
 process.stdin.pipe(tr).pipe(process.stdout);
 
 
 /*
-var through = require('through');
-
-var tr = through(function write(data) {
-        this.queue(data.toString().toUpperCase())
-    },
-    function end () {
-        this.queue(null)
-    })
-
+var through = require('through2');
+var tr = through(function (buf, _, next) {
+    this.push(buf.toString().toUpperCase());
+    next();
+});
 process.stdin.pipe(tr).pipe(process.stdout);
 */
