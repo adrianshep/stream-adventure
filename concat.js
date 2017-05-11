@@ -6,6 +6,11 @@ var server = http.createServer(function (req, res) {
         req.pipe(concat(function (body) {
             var obj = JSON.parse(body);
             res.end(Object.keys(obj).join('\n'));
+
+            function reverse(s){
+              return s.split("").reverse().join("");
+              }
+
         }));
     }
     else res.end();
