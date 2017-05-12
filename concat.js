@@ -8,6 +8,15 @@ process.stdin.pipe(concat(function (buffer) {
 
 /*
 
+Here's the reference solution:
+
+  var concat = require('concat-stream');
+
+  process.stdin.pipe(concat(function (src) {
+      var s = src.toString().split('').reverse().join('');
+      console.log(s);
+  }));
+
 You will be given text on process.stdin. Buffer the text and reverse it using
 the `concat-stream` module before writing it to stdout.
 
