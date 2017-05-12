@@ -1,21 +1,9 @@
-var concat = require('concat-stream');
-var http = require('http');
+var concat = require('concat-stream')
 
-var server = http.createServer(function (req, res) {
-    if (req.method === 'POST') {
-        req.pipe(concat(function (body) {
-            var obj = JSON.parse(body);
-            res.end(Object.keys(obj).join('\n'));
-
-            function reverse(s){
-              return s.split("").reverse().join("");
-              }
-
-        }));
-    }
-    else res.end();
-});
-server.listen(5000);
+process.stdin.pipe(concat(function (buffer) {
+  process.stdout.write(buffer.toString().split('').reverse().join(''))
+  process.stdout.write('\n')
+}))
 
 
 /*
